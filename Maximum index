@@ -1,6 +1,7 @@
 package gfg;
 
-//{ Driver Code Starts
+//Maximum index
+
 import java.io.*;
 import java.util.*;
 
@@ -8,32 +9,27 @@ class Main {
   
 	public static void main (String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int t = Integer.parseInt(br.readLine().trim()); //Inputting the testcases
+		int t = Integer.parseInt(br.readLine().trim());
+		
 		while(t-->0){
-		    int n = Integer.parseInt(br.readLine().trim()); // size of array
+		    int n = Integer.parseInt(br.readLine().trim());
 		    int arr[] = new int[n];
 		    String inputLine[] = br.readLine().trim().split(" ");
+			
 		    for(int i=0; i<n; i++){
-		        arr[i] = Integer.parseInt(inputLine[i]); // input elements of array
+		        arr[i] = Integer.parseInt(inputLine[i]);
 		    }
 		    
 		    Solution ob = new Solution();
 		    
-		    System.out.println(ob.maxIndexDiff(arr, n)); // print the result
+		    System.out.println(ob.maxIndexDiff(arr, n));
 		}
 	}
 }
-//} Driver Code Ends
-
 
 class Solution{
-  
-  // A[]: input array
-  // N: size of array
-  // Function to find the maximum index difference.
+
   static int maxIndexDiff(int a[], int n) { 
-      
-      // Your code here
       int[] maxArr = new int[n];
       maxArr[n - 1] = a[n - 1];
       for(int i = n - 2; i >= 0; i--) {
@@ -56,7 +52,6 @@ class Solution{
       }
       
       return ans;
-      
   }
 }
 
