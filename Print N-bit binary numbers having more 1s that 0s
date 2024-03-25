@@ -1,0 +1,53 @@
+//Print N-bit binary numbers having more 1s that 0s
+
+import java.io.*;
+import java.util.*;
+
+class GFG {
+    public static void main(String args[]) throws IOException {
+        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(read.readLine());
+
+        while(t-- > 0) {
+            int n = Integer.parseInt(read.readLine());
+            Solution ob = new Solution();
+            ArrayList<String> result = ob.NBitBinary(n);
+
+            for(String value : result){
+                System.out.print(value + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+class Solution {
+    
+    static void bit(ArrayList<String> res, int zero, int one, StringBuilder ans, int N) {
+        if(ans.length() == N) {
+            res.add(ans.toString());
+            return;
+        }
+        
+        if(one > zero) {
+            ans.append('0');
+            bit(res, zero + 1, one, ans, N);
+            ans.deleteCharAt(ans.length() - 1);
+        }
+        
+        ans.append('1');
+        bit(res, zero, one + 1, ans, N);
+        ans.deleteCharAt(ans.length() - 1);
+    }
+    
+    ArrayList<String> NBitBinary(int N) {
+        ArrayList<String> res = new ArrayList<>();
+        StringBuilder ans = new StringBuilder();
+        
+        ans.append('1');
+        bit(res, 0, 1, ans, N);
+        Collections.sort(res);
+        Collections.reverse(res);
+        return res;
+    }
+}
