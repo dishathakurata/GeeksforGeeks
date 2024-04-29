@@ -1,0 +1,97 @@
+//Remove every kth node
+
+import java.util.*;
+
+class Node {
+	Node next;
+	int data;
+	
+	Node(int d) {
+		data = d;
+		next = null;
+	}
+}
+
+class Delete_Kth_Node {
+	Node head;
+	Node tail;
+	
+	void addToTheLast(Node node) {
+		if(head == null) {
+		  head = node;
+		  tail = node;
+		}
+
+		else {
+		    tail.next = node;
+		    tail = tail.next ;
+		}
+	}
+
+	public static void main(String args[]) {
+      Scanner sc = new Scanner(System.in);
+		  int t=sc.nextInt();
+
+		  while(t>0) {
+			  int n = sc.nextInt();
+			  Delete_Kth_Node list = new Delete_Kth_Node();
+			  int a1=sc.nextInt();
+			  Node head= new Node(a1);
+        list.addToTheLast(head);
+
+        for (int i = 1; i < n; i++) {
+				  int a = sc.nextInt(); 
+				  list.addToTheLast(new Node(a));
+			  }
+
+			  int k = sc.nextInt();
+			  list.head = new Solution().delete(list.head,k); 
+			  Node temp = list.head;
+
+			  while(temp!=null) {
+				  System.out.print(temp.data+ " ");
+			    temp = temp.next;
+			  }
+			  System.out.println();
+			  t--;
+		  }
+	  }
+}
+
+class Node {
+	Node next;
+	int data;
+
+	Node(int d) {
+		data = d;
+		next = null;
+	}
+}
+
+class Solution {
+    Node delete(Node head, int k) {
+	    if(k == 1) {
+	        return null;
+	    }
+	    
+	    int n = 1;
+	    Node ptr = head;
+	    Node delp = null;
+	    
+	    while(ptr != null) {
+	        if(n == k) {
+	            n = 0;
+	            delp.next = ptr.next;
+	        }
+	        
+	        else {
+	            delp = ptr;
+	        }
+	        
+	        n++;
+	        ptr = ptr.next;
+	    }
+	    
+	    return head;
+    }
+}
