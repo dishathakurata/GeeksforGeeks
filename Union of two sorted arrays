@@ -38,6 +38,8 @@ class Main {
 }
 
 class Solution {
+
+    //Solution 1
     public static ArrayList<Integer> findUnion(int arr1[], int arr2[], int n, int m) {
         ArrayList<Integer> arr = new ArrayList<>();
         Set<Integer> set = new TreeSet<>();
@@ -55,5 +57,25 @@ class Solution {
         }
         
         return arr;
+    }
+
+    //Solution 2
+    public static ArrayList<Integer> findUnion(int arr1[], int arr2[], int n, int m) {
+        Map<Integer, Integer> map = new HashMap<>();
+        
+        for(int i = 0; i < n; i++) {
+            map.put(arr1[i], map.getOrDefault(arr1[i], 0) + 1);
+        }
+        
+        for(int i = 0; i < m; i++) {
+            map.put(arr2[i], map.getOrDefault(arr2[i], 0) + 1);
+        }
+        
+        Set<Integer> keys = map.keySet();
+        
+        ArrayList<Integer> ans = new ArrayList<Integer>(keys);
+        Collections.sort(ans);
+        
+        return ans;
     }
 }
