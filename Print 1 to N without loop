@@ -1,0 +1,32 @@
+//Print 1 to N without loop
+
+import java.io.*;
+import java.util.*;
+
+class Main {
+	public static void main (String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int T = sc.nextInt();
+
+		while(T-- > 0) {
+		    Solution obj = new Solution();
+		    int N = sc.nextInt();
+		    obj.printNos(N);
+		    System.out.println();
+		}
+	}
+}
+
+class Solution {
+    int i = 1;
+    
+    public void printNos(int N) {
+        if(i > N) {
+            return;
+        }
+        
+        System.out.print(i + " ");
+        i++;
+        printNos(N);
+    }
+}
