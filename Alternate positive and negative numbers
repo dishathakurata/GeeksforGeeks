@@ -1,0 +1,64 @@
+//Alternate positive and negative numbers
+
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int tc = Integer.parseInt(br.readLine().trim());
+
+        while(tc-- > 0) {
+            String input = br.readLine();
+            String[] inputArray = input.split("\\s+");
+            ArrayList<Integer> arr = new ArrayList<>();
+
+            for(String s : inputArray) {
+                arr.add(Integer.parseInt(s));
+            }
+
+            new Solution().rearrange(arr);
+
+            for(int num : arr) {
+                System.out.print(num + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+class Solution {
+    void rearrange(ArrayList<Integer> arr) {
+        List<Integer> A = new ArrayList<>();
+        List<Integer> B = new ArrayList<>();
+        
+        for(int i = 0; i < arr.size(); i++) {
+            if(arr.get(i) < 0) {
+                A.add(arr.get(i));
+            }
+            else {
+                B.add(arr.get(i));
+            }
+        }
+        
+        int i = 0, j = 0, k = 0;
+        
+        while(i < A.size() && j < B.size()) {
+            if(k % 2 == 0) {
+                arr.set(k++, B.get(j++));
+            }
+            else {
+                arr.set(k++, A.get(i++));
+            }
+        }
+        
+        while(i < A.size()) {
+            arr.set(k++, A.get(i++));
+        }
+        
+        while(j < B.size()) {
+            arr.set(k++, B.get(j++));
+        }
+    }
+}
