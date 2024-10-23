@@ -1,0 +1,78 @@
+//Find the sum of last n nodes of the linked list
+
+import java.io.*;
+import java.util.*;
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int a) {
+        data = a;
+        next = null;
+    }
+}
+
+class Node {
+    int data;
+    Node next;
+
+    public Node (int data){
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class Solution {
+    public int sumOfLastN_Nodes(Node head, int n) {
+        Node cur = head;
+        int size = 0;
+        
+        while(cur != null) {
+            size++;
+            cur = cur.next;
+        }
+        
+        int sum = 0;
+        
+        for(int i = 0; i < size - n; i++) {
+            head = head.next;
+        }
+        
+        while(head != null) {
+            sum += head.data;
+            head = head.next;
+        }
+        
+        return sum;
+    }
+}
+
+class LinkedList {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine());
+
+        while(t-- > 0) {
+            ArrayList<Integer> arr = new ArrayList<>();
+            String input = br.readLine();
+            StringTokenizer st = new StringTokenizer(input);
+
+            while(st.hasMoreTokens()) {
+                arr.add(Integer.parseInt(st.nextToken()));
+            }
+
+            int n = Integer.parseInt(br.readLine());
+            Node head = new Node(arr.get(0));
+            Node tail = head;
+
+            for(int i = 1; i < arr.size(); ++i) {
+                tail.next = new Node(arr.get(i));
+                tail = tail.next;
+            }
+
+            Solution ob = new Solution();
+            System.out.println(ob.sumOfLastN_Nodes(head, n));
+        }
+    }
+}
