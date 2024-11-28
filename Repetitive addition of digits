@@ -1,0 +1,38 @@
+//Repetitive addition of digits
+
+import java.io.*;
+import java.util.*;
+
+class GFG {
+    public static void main(String args[]) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+
+        while(t-- > 0) {
+            int N = sc.nextInt();
+            Solution ob = new Solution();
+            int ans = ob.singleDigit(N);
+            System.out.println(ans);
+            System.out.println("~");
+        }
+    }
+}
+
+class Solution {
+    public int singleDigit(int n) {
+        int sum = 0;
+        
+        while(true) {
+            sum += n % 10;
+            n /= 10;
+            
+            if((n == 0) && (sum >= 1 && sum <= 9)) {
+                return sum;
+            }
+            else if(n == 0 && sum > 9) {
+                n = sum;
+                sum = 0;
+            }
+        }
+    }
+}
