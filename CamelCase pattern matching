@@ -1,0 +1,55 @@
+//CamelCase pattern matching
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = Integer.parseInt(sc.nextLine());
+
+        while(t-- > 0) {
+            String[] arr = sc.nextLine().split(" ");
+            String pat = sc.nextLine();
+            Solution ob = new Solution();
+            List<String> ans = ob.camelCase(arr, pat);
+
+            if(ans.isEmpty()) {
+                System.out.println("[]");
+            }
+            else {
+                Collections.sort(ans);
+                System.out.println(String.join(" ", ans));
+            }
+        }
+        sc.close();
+    }
+}
+
+class Solution {
+    public List<String> camelCase(String[] arr, String pat) {
+        List<String> res = new ArrayList<>();
+        
+        for(String word : arr) {
+            int i = 0, j = 0;
+            
+            while(i < word.length() && j < pat.length()) {
+                if(Character.isLowerCase(word.charAt(i))) {
+                    i++;
+                }
+                else if(word.charAt(i) != pat.charAt(j)) {
+                    break;
+                }
+                else {
+                    i++;
+                    j++;
+                }
+            }
+          
+            if(j == pat.length()) {
+                res.add(word);
+            }
+        }
+        
+        return res;
+    }
+}
