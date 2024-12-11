@@ -1,0 +1,54 @@
+//Make array elements unique
+
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+
+class GFG {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine());
+
+        while(t-- > 0) {
+            String arr[] = br.readLine().split(" ");
+            int a[] = new int[arr.length];
+
+            for(int i = 0; i < arr.length; i++) {
+                a[i] = Integer.parseInt(arr[i]);
+            }
+
+            Solution obj = new Solution();
+            int f = 0;
+            int A = obj.minIncrements(a);
+            System.out.println(A);
+        }
+    }
+}
+
+class Solution {
+    public int minIncrements(int[] arr) {
+        int n = arr.length;
+        int count = 0;
+        int mx = arr[0];
+        
+        for(int ele : arr) {
+            mx = Math.max(mx, ele);
+        }
+      
+        int[] freq = new int[n + mx];
+
+        for(int ele : arr) {
+            freq[ele]++;
+        }
+
+        for(int num = 0; num < freq.length; num++) {
+            if(freq[num] > 1) {
+                freq[num + 1] += freq[num] - 1;
+                count += freq[num] - 1;
+                freq[num] = 1;
+            }
+        }
+
+        return count;
+    }
+}
