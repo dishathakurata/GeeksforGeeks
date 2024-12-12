@@ -29,6 +29,7 @@ public class Main {
 
 class Solution {
     int count(int[] arr, int n, int x) {
+        //Solution 1
         int count = 0, left = 0, right = n - 1;
         
         while(left <= right) {
@@ -54,6 +55,17 @@ class Solution {
                 }
                 
                 break;
+            }
+        }
+        
+        return count;
+
+        //Solution 2
+        int count = 0;
+        
+        for(int i = 0; i < arr.length; i++) {
+            if(arr[i] == target) {
+                count++;
             }
         }
         
