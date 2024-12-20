@@ -1,0 +1,29 @@
+//Square root
+
+import java.util.Scanner;
+
+class SquartRoot {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+
+        while(t > 0) {
+            int a = sc.nextInt();
+            Solution obj = new Solution();
+            System.out.println(obj.floorSqrt(a));
+            t--;
+        }
+    }
+}
+
+class Solution {
+    int floorSqrt(int n) {
+        int res = (int)Math.exp(0.5 * Math.log(n));
+        
+        if((res + 1) * (res + 1) <= n) {
+            res++;
+        }
+        
+        return res;
+    }
+}
