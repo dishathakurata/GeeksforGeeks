@@ -1,0 +1,55 @@
+//k-th largest sum contiguous subarray
+
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+
+class Solution {
+    public static int kthLargest(int[] arr, int k) {
+        int n = arr.length;
+        ArrayList<Integer> sums = new ArrayList<>();
+
+        for(int i = 0; i < n; i++) {
+            int sum = 0;
+            
+            for(int j = i; j < n; j++) {
+                sum += arr[j];
+                sums.add(sum);
+            }
+        }
+
+        Collections.sort(sums, Collections.reverseOrder());
+
+        return sums.get(k - 1);
+    }
+}
+
+class GFG {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine());
+
+        while(t-- > 0) {
+            String line = br.readLine();
+            String[] tokens = line.split(" ");
+            ArrayList<Integer> array = new ArrayList<>();
+
+            for(String token : tokens) {
+                array.add(Integer.parseInt(token));
+            }
+
+            int k = Integer.parseInt(br.readLine());
+            int[] arr = new int[array.size()];
+            int idx = 0;
+
+            for(int i : array) {
+                arr[idx++] = i;
+            }
+
+            Solution obj = new Solution();
+            int res = obj.kthLargest(arr, k);
+            System.out.println(res);
+            System.out.println("~");
+        }
+    }
+}
