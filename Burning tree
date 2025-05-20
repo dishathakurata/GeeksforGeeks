@@ -1,0 +1,45 @@
+//Burning tree
+
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    Node(int data) {
+        this.data = data;
+        left = null;
+        right = null;
+    }
+}
+
+class Solution {
+    private int result;
+    
+    public int minTime(Node root, int target) {
+        DFS(root, target);
+        
+        return result;
+    }
+
+    private int DFS(Node node, int start){
+        if(node == null) {
+            return 0;
+        }
+
+        int leftDepth = DFS(node.left, start);
+        int rightDepth = DFS(node.right, start);
+
+        if(node.data == start) {
+            result = Math.max(leftDepth, rightDepth);
+            
+            return -1;
+        }
+        else if(leftDepth >= 0 && rightDepth >= 0) {
+            return Math.max(leftDepth, rightDepth)+1;
+        }
+        
+        result = Math.max(result, Math.abs(leftDepth - rightDepth));
+        
+        return Math.min(leftDepth, rightDepth) - 1;
+    }
+}
