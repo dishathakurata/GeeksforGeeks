@@ -1,0 +1,23 @@
+//Equilibrium point
+
+class Solution {
+    public static int findEquilibrium(int arr[]) {
+        int sumL = arr[0], sumR = 0, e = 1;
+        
+        for(int i = 2; i < arr.length; i++) {
+            sumR += arr[i];
+        }
+        
+        while(sumL != sumR && e < arr.length - 1) {
+            sumL += arr[e];
+            sumR -= arr[e + 1];
+            e++;
+        }
+        
+        if(sumL == sumR) {
+            return e;
+        }
+        
+        return -1;
+    }
+}
