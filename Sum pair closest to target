@@ -1,0 +1,31 @@
+//Sum pair closest to target
+
+class Solution {
+    public List<Integer> sumClosest(int[] arr, int target) {
+        Arrays.sort(arr);
+        int minDiff = Integer.MAX_VALUE;
+        int left = 0, right = arr.length - 1;
+        List<Integer> list = new ArrayList<>();
+        
+        while(left < right) {
+            int curSum = arr[left] + arr[right];
+            
+            if(Math.abs(target - curSum) < minDiff) {
+                minDiff = Math.abs(target - curSum);
+                list = Arrays.asList(arr[left], arr[right]);
+            }
+            
+            if(curSum < target) {
+                left++;
+            }
+            else if(curSum > target) {
+                right--;
+            }
+            else {
+                return list;
+            }
+        }
+        
+        return list;
+    }
+}
