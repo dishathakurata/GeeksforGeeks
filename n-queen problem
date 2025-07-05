@@ -1,0 +1,31 @@
+//n-queen problem
+
+class Solution {
+    public ArrayList<ArrayList<Integer>> nQueen(int n) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        ArrayList<Integer> board = new ArrayList<>();
+        
+        nQueenUtil(1, n, board, res, 0, 0, 0);
+        
+        return res;
+    }
+    
+    public void nQueenUtil(int col, int n, ArrayList<Integer> board, ArrayList<ArrayList<Integer>> res, int row, int ld, int rd) {
+        if(col > n) {
+            res.add(new ArrayList<>(board));
+            return;
+        }
+        
+        for(int i = 1; i <= n; ++i) {
+            if(isSafe(i, col, row, ld, rd, n)) {
+                board.add(i);
+                nQueenUtil(col + 1, n, board, res, (row | (1 << i)), (ld | (1 << (i + col))), (rd | (1 << (i - col + n))));
+                board.remove(board.size() - 1);
+            }
+        }
+    }
+    
+    public boolean isSafe(int i, int col, int row, int ld, int rd, int n) {
+        return !(((row >> i) & 1) == 1) && !(((ld >> (i + col)) & 1) == 1) && !(((rd >> (i - col + n)) & 1) == 1);
+    }
+}
